@@ -59,15 +59,14 @@ var admin = new singleUser({
 
 //create collection instance
 var userGroup = new UsersCollection([
-  mike, killb
+  mike, killb, admin
 ]);
-
-// collection view instance
-var userGroupView = new allUsersView({ collection: userGroup });
-$('#allUsers').html(userGroupView.render().el);
-
 
 //making changes
 mike.set('name', "Michael Prather");
 userGroup.add(admin);
-userGroup.remove(killb);
+// userGroup.remove(killb);
+
+// collection view instance
+var userGroupView = new allUsersView({ collection: userGroup });
+$('#allUsers').html(userGroupView.render().el);
