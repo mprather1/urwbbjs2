@@ -1,6 +1,6 @@
 //models
 //user model
-SingleUser = Backbone.Model.extend({
+singleUser = Backbone.Model.extend({
   defaults: {
     name: "killb"
   }
@@ -8,7 +8,7 @@ SingleUser = Backbone.Model.extend({
 
 //model collection
 UsersCollection = Backbone.Collection.extend({
-  model: SingleUser
+  model: singleUser
 });
 
 
@@ -38,22 +38,22 @@ allUsersView = Backbone.View.extend({
 
   addUser: function(user) {
     var userView = new singleUserView ({ model: user });
-    this.$el.append(singleUserView.render().el);
+    this.$el.append(userView.render().el);
   }
 });
 
 
 //instantiation
 //create model instances
-var mike = new SingleUser({
+var mike = new singleUser({
   name: "Mike Prather"
 });
 
-var killb = new SingleUser({
+var killb = new singleUser({
   name: "Kill Bill"
 });
 
-var admin = new SingleUser({
+var admin = new singleUser({
   name: "admin"
 });
 
@@ -61,6 +61,10 @@ var admin = new SingleUser({
 var userGroup = new UsersCollection([
   mike, killb
 ]);
+
+// collection view instance
+var userGroupView = new allUsersView({ collection: userGroup });
+$('#allUsers').html(userGroupView.render().el);
 
 
 //making changes
