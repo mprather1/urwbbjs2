@@ -1,3 +1,4 @@
+//models
 //user model
 SingleUser = Backbone.Model.extend({
   defaults: {
@@ -10,6 +11,8 @@ UsersCollection = Backbone.Collection.extend({
   model: SingleUser
 });
 
+
+//views
 //SingleUser view
 singleUserView = Backbone.View.extend({
   tagName: 'li',
@@ -21,6 +24,21 @@ singleUserView = Backbone.View.extend({
     var userTemplate = this.template(this.model.toJSON());
     this.$el.html(userTemplate);
     return this;
+  }
+});
+
+//user collection view
+allUsersView = Backbone.View.extend({
+  tagName: 'ul',
+
+  render: function() {
+    this.collection.each(this.addUser, this);
+    return this;
+  },
+
+  addUser: function(user) {
+    var userView = new singleUserView ({ model: user });
+    this.$el.append(singleUserView.render().el);
   }
 });
 
