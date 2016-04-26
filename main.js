@@ -2,19 +2,6 @@
 SingleUser = Backbone.Model.extend({
   defaults: {
     name: "killb"
-  },
-
-  initialize: function() {
-
-    console.log("A model instance named " + this.get("name") + " has been created");
-
-    this.on('change', function() {
-      console.log("Something in our model has changed.");
-    });
-
-    this.on('change:name', function() {
-      console.log("The name for the " + this.get("name") + " model has changed");
-    });
   }
 });
 
@@ -23,6 +10,22 @@ UsersCollection = Backbone.Collection.extend({
   model: SingleUser
 });
 
+//SingleUser view
+singleUserView = Backbone.View.extend({
+  tagName: 'li',
+  className: 'userListItem',
+
+  template: _.template( $("#userElement").html() ),
+
+  render: function() {
+    var userTemplate = this.template(this.model.toJSON());
+    this.$el.html(userTemplate);
+    return this;
+  }
+});
+
+
+//instantiation
 //create model instances
 var mike = new SingleUser({
   name: "Mike Prather"
@@ -40,6 +43,7 @@ var admin = new SingleUser({
 var userGroup = new UsersCollection([
   mike, killb
 ]);
+
 
 //making changes
 mike.set('name', "Michael Prather");
