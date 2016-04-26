@@ -1,5 +1,5 @@
 //user model
-singleUser = Backbone.Model.extend({
+SingleUser = Backbone.Model.extend({
   defaults: {
     name: "killb"
   },
@@ -18,9 +18,30 @@ singleUser = Backbone.Model.extend({
   }
 });
 
-// instantiate
-var mike = new singleUser({
+//model collection
+UsersCollection = Backbone.Collection.extend({
+  model: SingleUser
+});
+
+//create model instances
+var mike = new SingleUser({
   name: "Mike Prather"
 });
 
-mike.set('name', "Michael Prather")
+var killb = new SingleUser({
+  name: "Kill Bill"
+});
+
+var admin = new SingleUser({
+  name: "admin"
+});
+
+//create collection instance
+var userGroup = new UsersCollection([
+  mike, killb
+]);
+
+//making changes
+mike.set('name', "Michael Prather");
+userGroup.add(admin);
+userGroup.remove(killb);
