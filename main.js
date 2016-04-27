@@ -24,7 +24,21 @@ singleUserView = Backbone.View.extend({
     var userTemplate = this.template(this.model.toJSON());
     this.$el.html(userTemplate);
     return this;
+  },
+
+  events: {
+  	'mouseover': 'addBgColor',
+  	'mouseout': 'removeBgColor'
+  },
+
+  addBgColor: function() {
+    this.$el.css('color', 'green');
+  },
+
+  removeBgColor: function() {
+    this.$el.css('color', 'black');
   }
+
 });
 
 //user collection view
@@ -62,7 +76,8 @@ var userGroup = new UsersCollection([
   mike, killb, admin
 ]);
 
-//making changes
+
+//making changes needs to be befor collection view instance
 mike.set('name', "Michael Prather");
 userGroup.add(admin);
 // userGroup.remove(killb);
