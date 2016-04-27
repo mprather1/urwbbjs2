@@ -9,11 +9,13 @@
   <body>
 
     <div id="allUsers"></div>
+    <div id="copy"></div>
 
     <script id="userElement" type="text/template">
+      <a href="#<%= link %>"><%= name %></a>
         Name: <%= name %>
     </script>
-    
+
     <script src="lib/jquery.js"></script>
     <script src="lib/underscore.js"></script>
     <script src="lib/backbone.js"></script>

@@ -60,15 +60,18 @@ allUsersView = Backbone.View.extend({
 //instantiation
 //create model instances
 var mike = new singleUser({
-  name: "Mike Prather"
+  name: "Mike Prather",
+  link: "mikep"
 });
 
 var killb = new singleUser({
-  name: "Kill Bill"
+  name: "Kill Bill",
+  link: "killbill"
 });
 
 var admin = new singleUser({
-  name: "admin"
+  name: "admin",
+  link: "admind"
 });
 
 //create collection instance
@@ -85,3 +88,36 @@ userGroup.add(admin);
 // collection view instance
 var userGroupView = new allUsersView({ collection: userGroup });
 $('#allUsers').html(userGroupView.render().el);
+
+
+//router
+Router = Backbone.Router.extend({
+  routes :{
+    "": "noCopy",
+    "mikep" : "mikeMessage",
+    "killbill" : "killbMessage",
+    "admind" : "adminMessage"
+  },
+
+  noCopy: function() {
+    $("#copy").html("");
+  },
+
+  mikeMessage: function() {
+    $("#copy").html("Mike Prather was here!!!");
+  },
+
+  killbMessage: function() {
+    $("#copy").html("Kill Bill was here!!!");
+  },
+
+  adminMessage: function() {
+    $("#copy").html("Admin was here!!!");
+  }
+
+});
+
+//instantiate router
+var userRouter = new Router();
+
+Backbone.history.start();
